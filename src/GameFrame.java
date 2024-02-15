@@ -1,7 +1,9 @@
+import javax.swing.JButton;
 import javax.swing.JFrame;
 
 public class GameFrame extends JFrame{
-	
+	GamePanel game;
+	JButton resetButton;
 	GameFrame(){
 		
 		
@@ -12,6 +14,8 @@ public class GameFrame extends JFrame{
 		this.pack();
 		this.setVisible(true);
 		this.setLocationRelativeTo(null);
+		
+		
 	}
 	
 	

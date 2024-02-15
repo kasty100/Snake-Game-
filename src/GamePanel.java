@@ -107,16 +107,19 @@ public class GamePanel extends JPanel implements ActionListener{
 	}
 	public void checkCollisions() {
 		//checks if head collides with body
+		
 		for(int i = bodyParts;i>0;i--) {
 			if((x[0] == x[i])&& (y[0] == y[i])) {
 				running = false;
 			}
 		}
 		//check if head touches left border
+		
 		if(x[0] < 0) {
 			running = false;
 		}
 		//check if head touches right border
+		
 		if(x[0] > SCREEN_WIDTH) {
 			running = false;
 		}
@@ -135,15 +138,23 @@ public class GamePanel extends JPanel implements ActionListener{
 	}
 	public void gameOver(Graphics g) {
 		//Score
-		g.setColor(Color.red);
+		g.setColor(new Color(242, 216, 189));
 		g.setFont(new Font("Sans serif", Font.ROMAN_BASELINE, 50));
 		FontMetrics metrics1 = getFontMetrics(g.getFont());
 		g.drawString("Score: "+frogsEaten, (SCREEN_WIDTH - metrics1.stringWidth("Score: "+frogsEaten))/2, g.getFont().getSize());
 		//Game Over text
-		g.setColor(Color.red);
-		g.setFont( new Font("Sans serif",Font.ROMAN_BASELINE, 65));
+		g.setColor(new Color(random.nextInt(255),random.nextInt(255),random.nextInt(255)));
+		g.setFont( new Font("Sans serif",Font.ROMAN_BASELINE, 75));
 		FontMetrics metrics2 = getFontMetrics(g.getFont());
 		g.drawString("Nikal Lavde 😒", (SCREEN_WIDTH - metrics2.stringWidth("Game Over"))/3, SCREEN_HEIGHT/2);
+		
+		//reset Button RnD
+		
+//		g.setColor(new Color(242, 216, 189));
+//		g.setFont(new Font("Sans serif", Font.ROMAN_BASELINE, 50));
+//		FontMetrics metrics3 = getFontMetrics(g.getFont());
+//		g.drawString("Play Again ", 250, 500);
+		
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -180,7 +191,32 @@ public class GamePanel extends JPanel implements ActionListener{
 					direction = 'D';
 				}
 				break;
+			 case KeyEvent.VK_ENTER:
+	                resetGame();
+	                break;
 			}
 		}
 	}
-}
+	private void resetGame() {
+		if(timer != null && timer.isRunning()) {
+            timer.stop();
+        }
+		 // Reset relevant variables
+        bodyParts = 6;
+        frogsEaten = 0;
+        direction = 'R';
+        running = false;
+        
+        // Reset snake position
+        for (int i = 0; i < bodyParts; i++) {
+            x[i] = 0;
+            y[i] = 0;
+        }
+
+        // Restart the game
+        startGame();
+    }
+
+		
+	}
+
