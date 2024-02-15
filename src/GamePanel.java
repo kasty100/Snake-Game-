@@ -108,6 +108,11 @@ for(int i =0;i<bodyParts;i++)
 		
 	}
 	public void checkMice() {
+		if((x[0]==miceX)&&(y[0]==miceY)) {
+			bodyParts++;
+			miceEaten++;
+			newMice();
+		}
 		
 	}
 	public void checkCollision() {
